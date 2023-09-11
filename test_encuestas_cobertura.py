@@ -88,7 +88,7 @@ def test_click_manzana_8():
     mf.dar_click_en_manzana_seleccionada(driver, "Manzana 8")
 
 def test_click_manzana_8_vivienda1():
-    """"""
+    """se selecciona la vivienda 1 de la manzana 8 para iniciar encuestas"""
     #mf.dar_click_tab_en_proceso(driver)
     mf.dar_click_en_vivienda_de_manzana_seleccionada(driver, "Vivienda 1")
 
