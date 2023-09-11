@@ -134,3 +134,48 @@ def obtener_elemento_por_id(driver, id_nombre):
     elemento = wait.until(
         EC.presence_of_element_located((AppiumBy.ID, f"com.ine.app:id/{id_nombre}")))
     return elemento
+
+
+def obtener_lista_de_elementos_id(driver, id_nombre):
+    wait = WebDriverWait(driver, 10)
+    lista_elementos = wait.until(
+        EC.presence_of_all_elements_located((AppiumBy.ID, f"com.ine.app:id/{id_nombre}")))
+    return lista_elementos
+
+
+def obtener_lista_de_elementos_radiobutom(driver):
+    wait = WebDriverWait(driver, 10)
+    lista_elementos = wait.until(
+        EC.presence_of_all_elements_located((AppiumBy.CLASS_NAME, "android.widget.RadioButton")))
+    return lista_elementos
+
+
+def siguiente(driver):
+    boton_siguiente = driver.find_element(AppiumBy.ID, "com.ine.app:id/siguiente")
+    click_boton_siguiente = boton_siguiente
+    click_boton_siguiente.click()
+    time.sleep(.5)
+
+
+def siguiente_atras(driver, AppiumBy):
+    boton_siguiente = driver.find_element(AppiumBy.ID, "com.ine.app:id/siguiente")
+    click_boton_siguiente = boton_siguiente
+    click_boton_siguiente.click()
+    boton_atras = driver.find_element(AppiumBy.ID, "com.ine.app:id/anterior")
+    click_boton_atras = boton_atras
+    click_boton_atras.click()
+    time.sleep(.5)
+
+
+def atras(driver, AppiumBy):
+    boton_atras = driver.find_element(AppiumBy.ID, "com.ine.app:id/anterior")
+    click_boton_atras = boton_atras
+    click_boton_atras.click()
+    time.sleep(.5)
+
+def obtener_elemento_radiobutton_xpath(driver, text):
+    wait = WebDriverWait(driver, 10)
+    element = wait.until(
+        EC.presence_of_element_located((AppiumBy.XPATH, f"//android.widget.RadioButton[@text='{text}']")))
+    return element
+

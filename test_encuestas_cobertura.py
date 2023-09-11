@@ -53,7 +53,7 @@ def test_longitud_password():
     texto_contrasenia = wait.until(
         EC.presence_of_element_located((AppiumBy.ID, 'com.ine.app:id/edtPassword')))
 
-    texto_contrasenia.click()
+    # texto_contrasenia.click()
     texto_contrasenia.set_text("Passw01.")
     driver.hide_keyboard()
     lon_contrasenia = len(texto_contrasenia.text)
@@ -69,8 +69,9 @@ def test_terminos_y_condiciones():
     boton_aceptar.click()
     assert aceptar_habilitado
 
+
 def test_menu_lateral_y_apartado_viviendas_seleccionadas():
-    boton_avatar = driver.find_element(AppiumBy.ID, "com.ine.app:id/avatar")
+    boton_avatar = mf.obtener_elemento_por_id(driver, "avatar")
     boton_avatar.click()
     clave_usuario = driver.find_element(AppiumBy.ID, "com.ine.app:id/userName")
     assert clave_usuario.text == "EN010103"
@@ -82,27 +83,74 @@ def test_menu_lateral_y_apartado_viviendas_seleccionadas():
                                                          "//android.widget.TextView[@text='Viviendas seleccionadas']")
     opcion_viviendas_seleccionadas.click()
 
+
 def test_click_manzana_8():
     """"""
     mf.dar_click_tab_en_proceso(driver)
     mf.dar_click_en_manzana_seleccionada(driver, "Manzana 8")
 
+
 def test_click_manzana_8_vivienda1():
     """se selecciona la vivienda 1 de la manzana 8 para iniciar encuestas"""
-    #mf.dar_click_tab_en_proceso(driver)
+    # mf.dar_click_tab_en_proceso(driver)
     mf.dar_click_en_vivienda_de_manzana_seleccionada(driver, "Vivienda 1")
 
-    seccion_card = mf.obtener_elemento_por_id(driver, "text_vivienda")
-    assert "Vivienda 01" == seccion_card.text()
+    vivienda_card = mf.obtener_elemento_por_id(driver, "text_vivienda")
+    assert "Vivienda 01" == vivienda_card.text
+    seccion_card = mf.obtener_elemento_por_id(driver, "text_seccion")
+    assert "SECCION: 384" == seccion_card.text
+    manzana_card = mf.obtener_elemento_por_id(driver, "text_manzana")
+    assert "MANZANA: 08" == manzana_card.text
+    distrito_card = mf.obtener_elemento_por_id(driver, "text_distrito")
+    assert "DISTRITO: 01" == distrito_card.text
 
     boton_seleccionar_en_card = driver.find_element(AppiumBy.ID, "com.ine.app:id/btn_seleccionar")
     boton_seleccionar_en_card.click()
     mf.dar_click_en_aceptar_usu_de_coordenadas(driver)
 
 
+def test_validar_informacion_Geoelectoral():
+    """Test para comprobar la informacion geoelectoral pregunta 1"""
+    texto_entidad = mf.obtener_elemento_por_id(driver, "entidad")
+    assert "Entidad: Aguascalientes" == texto_entidad.text
+    texto_distrito = mf.obtener_elemento_por_id(driver, "distrito")
+    assert "Distrito: 1" == texto_distrito.text
+    texto_municipio = mf.obtener_elemento_por_id(driver, "municipio")
+    assert "Municipio: CALVILLO" == texto_municipio.text
+    texto_seccion = mf.obtener_elemento_por_id(driver, "seccion")
+    assert "Seccion: 384" == texto_seccion.text
+    texto_localidad = mf.obtener_elemento_por_id(driver, "localidad")
+    assert "Localidad: CALVILLO" == texto_localidad.text
+    texto_manzana = mf.obtener_elemento_por_id(driver, "manzana")
+    assert "Manzana: 8" == texto_manzana.text
 
 
+def test_validar_informacion_Domicilio():
+    """Test para comprobar la informacion geoelectoral pregunta 1"""
+    texto_calle = mf.obtener_elemento_por_id(driver, "calle")
+    assert "Calle: CAFE" == texto_calle.text
+    texto_numExterior = mf.obtener_elemento_por_id(driver, "numExterior")
+    assert "Número exterior: 1" == texto_numExterior.text
+    texto_colonia_localidad = mf.obtener_elemento_por_id(driver, "coloniaLocalidad")
+    assert "Colonia o Localidad: CALVILLO" == texto_colonia_localidad.text
+    texto_consecutivo = mf.obtener_elemento_por_id(driver, "consecutivo")
+    assert "Consecutivo de vivienda: 1" == texto_consecutivo.text
 
+
+def test_cuestionario_pregunta_3():
+    """Se contesta la pregunta 3 con la opción 1 vivienda habitada"""
+    mf.siguiente(driver)
+    pregunta3 = mf.obtener_lista_de_elementos_id(driver, "opcion")
+    pregunta3[0].click()
+    mf.siguiente(driver)
+
+
+def test_cuestionario_pregunta_4():
+    """Se contesta la pregunta 3 con la opción 1 vivienda habitada"""
+    pregunta4 = mf.obtener_lista_de_elementos_radiobutom(driver)
+    pregunta4[0].click()
+
+    mf.siguiente(driver)
 
 
 gc.collect()
