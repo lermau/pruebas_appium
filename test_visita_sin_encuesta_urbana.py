@@ -131,19 +131,22 @@ def test_validar_informacion_Domicilio():
     texto_calle = mf.obtener_elemento_por_id(driver, "calle")
     assert "Calle: CAFE" == texto_calle.text
     texto_numExterior = mf.obtener_elemento_por_id(driver, "numExterior")
-    assert "Número exterior: 1" == texto_numExterior.text
+    assert "Número exterior: 2" == texto_numExterior.text
     texto_colonia_localidad = mf.obtener_elemento_por_id(driver, "coloniaLocalidad")
     assert "Colonia o Localidad: CALVILLO" == texto_colonia_localidad.text
     texto_consecutivo = mf.obtener_elemento_por_id(driver, "consecutivo")
-    assert "Consecutivo de vivienda: 1" == texto_consecutivo.text
+    assert "Consecutivo de vivienda: 2" == texto_consecutivo.text
 
 
 def test_cuestionario_pregunta_3():
     """Se contesta la pregunta 3 con la opción 1 vivienda habitada"""
     mf.siguiente(driver)
     pregunta3 = mf.obtener_lista_de_elementos_id(driver, "opcion")
-    pregunta3[0].click()
-    mf.siguiente(driver)
+    pregunta3[1].click()
+    driver.swipe(520, 1914, 520, 1047)
+    boton_finalizar_encuesta = mf.obtener_elemento_por_id(driver, "finalizar")
+    boton_finalizar_encuesta.click()
+
 
 
 # def test_cuestionario_pregunta_4():

@@ -1,5 +1,4 @@
 import time
-
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -173,9 +172,16 @@ def atras(driver, AppiumBy):
     click_boton_atras.click()
     time.sleep(.5)
 
+
 def obtener_elemento_radiobutton_xpath(driver, text):
     wait = WebDriverWait(driver, 10)
     element = wait.until(
         EC.presence_of_element_located((AppiumBy.XPATH, f"//android.widget.RadioButton[@text='{text}']")))
+    return element
+
+def obtener_elemento_text_view_xpath(driver, text):
+    wait = WebDriverWait(driver, 10)
+    element = wait.until(
+        EC.presence_of_element_located((AppiumBy.XPATH, f"//android.widget.TextView[@text='{text}']")))
     return element
 
