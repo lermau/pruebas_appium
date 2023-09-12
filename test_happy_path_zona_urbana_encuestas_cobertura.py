@@ -4,8 +4,9 @@ from appium import webdriver
 from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
 import misFunciones as mf
+import funcionesApp as funApp
+
 import time
 
 caps = {
@@ -149,8 +150,58 @@ def test_cuestionario_pregunta_4():
     """Se contesta la pregunta 3 con la opción 1 vivienda habitada"""
     pregunta4 = mf.obtener_lista_de_elementos_radiobutom(driver)
     pregunta4[0].click()
-
     mf.siguiente(driver)
+
+
+def test_cuestionario_pregunta_5_2():
+    """Se contesta la pregunta 3 con la opción 1 vivienda habitada"""
+    pregunta5_2 = mf.obtener_elemento_por_id(
+        driver, "encuesta_cobertura_seccion_5_edittext_personas_18_o_mas")
+    pregunta5_2.click()
+    pregunta5_2.set_text("1")
+    driver.hide_keyboard()
+    mf.siguiente(driver)
+
+
+def test_agregar_habitante():
+    funApp.agregar_ciudadano_fuera_del_padron(driver, "Valencia", "Lerma", "Mauricio")
+    ciudadano1 = mf.obtener_lista_de_elementos_id(driver, "nombreTextView")
+    ciudadano1[0].click()
+    funApp.seleccionar_fecha_nacimiento(driver, "1921", "lun., 12 de septiembre de 1921")
+    sexo = mf.obtener_elemento_radiobutton_xpath(driver, "Mujer")
+    sexo.click()
+    driver.swipe(520, 1914, 520, 1047)
+    grado_escolar = mf.obtener_elemento_radiobutton_xpath(driver, "Ninguno")
+    grado_escolar.click()
+    driver.swipe(520, 1914, 520, 1047)
+    ocupacion = mf.obtener_elemento_radiobutton_xpath(driver, "Trabaja")
+    ocupacion.click()
+    mf.siguiente(driver)
+
+def test_pregunta_7_1():
+    respuesta1 = mf.obtener_elemento_radiobutton_xpath(driver, "Si")
+    respuesta1.click()
+    mf.siguiente(driver)
+
+def test_pregunta_9_1():
+    respuesta3 = mf.obtener_elemento_radiobutton_xpath(driver, "No sabe")
+    respuesta3.click()
+    mf.siguiente(driver)
+
+def test_pregunta_10_1():
+    respuesta3 = mf.obtener_elemento_radiobutton_xpath(driver, "No sabe")
+    respuesta3.click()
+    mf.siguiente(driver)
+
+def test_pregunta_11_1():
+    respuesta1 = mf.obtener_elemento_radiobutton_xpath(driver, "Ciudadano en cuestión")
+    respuesta1.click()
+    boton_finalizar_encuesta = mf.obtener_elemento_por_id(driver, "finalizar")
+    boton_finalizar_encuesta.click()
+
+
+
+
 
 
 gc.collect()
