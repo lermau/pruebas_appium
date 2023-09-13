@@ -127,6 +127,15 @@ def dar_click_en_vivienda_de_manzana_seleccionada(driver, numero_de_vivienda):
     viviendas[indice_vivienda].click()
     time.sleep(.5)
 
+def dar_click_en_vivienda_de_localidad_seleccionada(driver, numero_de_vivienda):
+    viviendas = driver.find_elements(AppiumBy.ID, 'com.ine.app:id/childTitle')
+    nombres_de_viviendas = []
+    for vivienda in viviendas:
+        nombres_de_viviendas.append(vivienda.text)
+    indice_vivienda = nombres_de_viviendas.index(f"{numero_de_vivienda}")
+    viviendas[indice_vivienda].click()
+    time.sleep(.5)
+
 
 def obtener_elemento_por_id(driver, id_nombre):
     wait = WebDriverWait(driver, 10)
@@ -184,4 +193,22 @@ def obtener_elemento_text_view_xpath(driver, text):
     element = wait.until(
         EC.presence_of_element_located((AppiumBy.XPATH, f"//android.widget.TextView[@text='{text}']")))
     return element
+
+
+def enviar_encuestas(driver):
+    wait = WebDriverWait(driver, 10)
+    element = wait.until(
+        EC.presence_of_element_located((AppiumBy.XPATH, f"//android.widget.TextView[@text='COMPLETADAS']")))
+    element.click()
+    boton_enviar_encuesta = obtener_elemento_por_id(driver, "enviar")
+    boton_enviar_encuesta.click()
+
+def dar_click_en_localidad_seleccionada(driver, nombre_localidad):
+    localidades = driver.find_elements(AppiumBy.ID, 'com.ine.app:id/parentTitle')
+    nombres_de_localidades = []
+    for localidad in localidades:
+        nombres_de_localidades.append(localidad.text)
+    indice_localidad = nombres_de_localidades.index(f"{nombre_localidad}")
+    localidades[indice_localidad].click()
+    time.sleep(.5)
 

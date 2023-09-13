@@ -343,7 +343,7 @@ def test_conteo_cobertura():
 #         time.sleep(.5)
 #     mf.guardar_registros_conteo(driver)
 ################################################################################
-######################ZONA NO URBANA GENERAL####################################
+######################ZONA NO URBANA AlTERNA####################################
 ################################################################################
 def test_zona_NUG_pseudomanzanas_localidad_22():
     """Se agregan solo 2 pseudomanzanas"""

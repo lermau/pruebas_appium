@@ -85,13 +85,13 @@ def test_menu_lateral_y_apartado_viviendas_seleccionadas():
     opcion_viviendas_seleccionadas.click()
 
 
-def test_click_manzana_8():
+def test_click_manzana_69():
     """"""
     mf.dar_click_tab_en_proceso(driver)
-    mf.dar_click_en_manzana_seleccionada(driver, "Manzana 8")
+    mf.dar_click_en_manzana_seleccionada(driver, "Manzana 69")
 
 
-def test_click_manzana_8_vivienda1():
+def test_click_manzana_69_vivienda1():
     """se selecciona la vivienda 1 de la manzana 8 para iniciar encuestas"""
     # mf.dar_click_tab_en_proceso(driver)
     mf.dar_click_en_vivienda_de_manzana_seleccionada(driver, "Vivienda 1")
@@ -99,9 +99,9 @@ def test_click_manzana_8_vivienda1():
     vivienda_card = mf.obtener_elemento_por_id(driver, "text_vivienda")
     assert "Vivienda 01" == vivienda_card.text
     seccion_card = mf.obtener_elemento_por_id(driver, "text_seccion")
-    assert "SECCION: 384" == seccion_card.text
+    assert "SECCION: 362" == seccion_card.text
     manzana_card = mf.obtener_elemento_por_id(driver, "text_manzana")
-    assert "MANZANA: 08" == manzana_card.text
+    assert "MANZANA: 69" == manzana_card.text
     distrito_card = mf.obtener_elemento_por_id(driver, "text_distrito")
     assert "DISTRITO: 01" == distrito_card.text
 
@@ -119,17 +119,17 @@ def test_validar_informacion_Geoelectoral():
     texto_municipio = mf.obtener_elemento_por_id(driver, "municipio")
     assert "Municipio: CALVILLO" == texto_municipio.text
     texto_seccion = mf.obtener_elemento_por_id(driver, "seccion")
-    assert "Seccion: 384" == texto_seccion.text
+    assert "Seccion: 362" == texto_seccion.text
     texto_localidad = mf.obtener_elemento_por_id(driver, "localidad")
     assert "Localidad: CALVILLO" == texto_localidad.text
     texto_manzana = mf.obtener_elemento_por_id(driver, "manzana")
-    assert "Manzana: 8" == texto_manzana.text
+    assert "Manzana: 69" == texto_manzana.text
 
 
 def test_validar_informacion_Domicilio():
     """Test para comprobar la informacion geoelectoral pregunta 1"""
     texto_calle = mf.obtener_elemento_por_id(driver, "calle")
-    assert "Calle: CAFE" == texto_calle.text
+    assert "Calle: RIOS" == texto_calle.text
     texto_numExterior = mf.obtener_elemento_por_id(driver, "numExterior")
     assert "Número exterior: 1" == texto_numExterior.text
     texto_colonia_localidad = mf.obtener_elemento_por_id(driver, "coloniaLocalidad")
@@ -168,7 +168,7 @@ def test_agregar_habitante():
     ciudadano1 = mf.obtener_lista_de_elementos_id(driver, "nombreTextView")
     ciudadano1[0].click()
     funApp.seleccionar_fecha_nacimiento(driver, "1921", "lun., 12 de septiembre de 1921")
-    sexo = mf.obtener_elemento_radiobutton_xpath(driver, "Mujer")
+    sexo = mf.obtener_elemento_radiobutton_xpath(driver, "Hombre")
     sexo.click()
     driver.swipe(520, 1914, 520, 1047)
     grado_escolar = mf.obtener_elemento_radiobutton_xpath(driver, "Ninguno")
@@ -198,6 +198,9 @@ def test_pregunta_11_1():
     respuesta1.click()
     boton_finalizar_encuesta = mf.obtener_elemento_por_id(driver, "finalizar")
     boton_finalizar_encuesta.click()
+
+def test_envio_encuestas():
+    mf.enviar_encuestas(driver)
 
 
 
