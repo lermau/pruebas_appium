@@ -76,7 +76,7 @@ def test_elegir_ciudadano():
     boton_encuesta_actualizacion = mf.obtener_elemento_por_id(driver, "rl_encuesta")
     boton_encuesta_actualizacion.click()
     mf.dar_click_en_seccion_actualizacion(driver, "Sección 4292")
-    mf.dar_click_en_ciudadano(driver, "RUIZ MARQUEZ SABINO")
+    mf.dar_click_en_ciudadano(driver, "ISLAS LOPEZ MARCO ANTONIO")
     mf.dar_click_en_aceptar_usu_de_coordenadas(driver)
     mf.siguiente(driver)
 
@@ -91,7 +91,7 @@ def test_uso_de_domicilio():
     mf.siguiente(driver)
 
 
-def test_realizacion_de_la_entrevista():
+def test_agendar_segunda_visita():
     pregunta3 = mf.obtener_elemento_text_view_xpath(driver, "3. Realización de la entrevista.")
     assert pregunta3.is_displayed()
     opcion3_1_1 = mf.obtener_elemento_radiobutton_xpath(driver, "No, por ausencia")
@@ -116,7 +116,7 @@ def test_realizacion_de_la_entrevista():
 
 def test_flujo_ideal():
     mf.dar_click_en_seccion_actualizacion(driver, "Sección 4292")
-    mf.dar_click_en_ciudadano(driver, "RUIZ MARQUEZ SABINO")
+    mf.dar_click_en_ciudadano(driver, "ISLAS LOPEZ MARCO ANTONIO")
     #mf.dar_click_en_aceptar_usu_de_coordenadas(driver)
     mf.siguiente(driver)
 
@@ -129,6 +129,44 @@ def test_uso_de_domicilio2():
     opcion2_2_1.click()
     mf.siguiente(driver)
 
+def test_agendar_tercera_visita():
+    pregunta3 = mf.obtener_elemento_text_view_xpath(driver, "3. Realización de la entrevista.")
+    assert pregunta3.is_displayed()
+    opcion3_1_1 = mf.obtener_elemento_radiobutton_xpath(driver, "No, por ausencia")
+    opcion3_1_1.click()
+    driver.swipe(520, 1914, 520, 1047)
+    agendar = mf.obtener_elemento_text_view_xpath(driver, "¿AGENDAR UNA SIGUIENTE VISITA?")
+    assert agendar.is_displayed()
+    opcion3_1_2 = mf.obtener_elemento_radiobutton_xpath(driver, "Si")
+    opcion3_1_2.click()
+    driver.swipe(520, 1914, 520, 1047)
+
+    boton_agendar = mf.obtener_elemento_por_id(driver, "agendar_visita")
+    boton_agendar.click()
+
+    wait = WebDriverWait(driver, 10)
+    guardar_visita = wait.until(
+        EC.presence_of_element_located((AppiumBy.ID, "com.google.android.calendar:id/action_today")))
+    guardar_visita.click()
+    time.sleep(3)
+    driver.swipe(1080, 914, 540, 914)
+
+
+################################
+def test_flujo_ideal2():
+    mf.dar_click_en_seccion_actualizacion(driver, "Sección 4292")
+    mf.dar_click_en_ciudadano(driver, "ISLAS LOPEZ MARCO ANTONIO")
+    #mf.dar_click_en_aceptar_usu_de_coordenadas(driver)
+    mf.siguiente(driver)
+
+def test_uso_de_domicilio3():
+    opcion2_1 = mf.obtener_elemento_radiobutton_xpath(driver, "Vivienda")
+    opcion2_1.click()
+    pregunta2_2 = mf.obtener_elemento_text_view_xpath(driver, "2.1. ¿QUÉ USO TIENE EL DOMICILIO?")
+    assert pregunta2_2.is_displayed()
+    opcion2_2_1 = mf.obtener_elemento_radiobutton_xpath(driver, "Si")
+    opcion2_2_1.click()
+    mf.siguiente(driver)
 
 def test_realizacion_de_la_entrevista2():
     pregunta3 = mf.obtener_elemento_text_view_xpath(driver, "3. Realización de la entrevista.")
@@ -192,7 +230,7 @@ def test_opinion_sobre_servicio():
 def test_pregunta12():
 
     observaciones = mf.obtener_elemento_por_id(driver, "causaEdit")
-    observaciones.set_text("Envio en segunda visita")
+    observaciones.set_text("Envío en tercera visita")
     boton_guardar_registros = mf.obtener_elemento_por_id(driver,"finalizarEncuesta")
     boton_guardar_registros.click()
     time.sleep(6)

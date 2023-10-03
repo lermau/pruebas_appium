@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from appium.webdriver.common.mobileby import MobileBy as AppiumBy
-
+import datetime
 
 def dar_click_seccion(driver, text):
     wait = WebDriverWait(driver, 10)
@@ -258,3 +258,21 @@ def dar_click_en_ciudadano(driver, nombre_ciudadano):
     indice_ciudadano = nombres_de_ciudadanos.index(f"{nombre_ciudadano}")
     lista_ciudadanos[indice_ciudadano].click()
     time.sleep(.5)
+
+
+
+
+
+def fecha_de_nacimiento():
+    # Obtén la fecha actual
+    fecha_actual = datetime.date.today()
+    # Obtiene el mes de la fecha actual como un número entero (1 para enero, 2 para febrero, etc.)
+    mes_actual = fecha_actual.month
+    dias_de_la_semana = ("lun.", "mar.", "mié.", "jue.", "vie.", "sáb.", "dom.")
+    mes = (
+    "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre",
+    "diciembre")
+    fechaNacimiento = datetime.date(1921, mes_actual, 9)
+    fechaArmada = f"{dias_de_la_semana[fechaNacimiento.weekday()]}, 9 de {mes[mes_actual - 1]} de 1921"
+    # print(fechaArmada)
+    return fechaArmada

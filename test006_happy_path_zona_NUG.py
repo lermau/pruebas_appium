@@ -154,7 +154,7 @@ def test_agregar_habitante():
     funApp.agregar_ciudadano_fuera_del_padron(driver, "Trujillo", "Valencia", "Sofia")
     ciudadano1 = mf.obtener_lista_de_elementos_id(driver, "nombreTextView")
     ciudadano1[0].click()
-    funApp.seleccionar_fecha_nacimiento(driver, "1921", "lun., 10 de octubre de 1921")
+    funApp.seleccionar_fecha_nacimiento(driver, "1921", mf.fecha_de_nacimiento())
     sexo = mf.obtener_elemento_radiobutton_xpath(driver, "Mujer")
     sexo.click()
     driver.swipe(520, 1914, 520, 1047)
