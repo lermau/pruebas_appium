@@ -109,6 +109,7 @@ def test_realizacion_de_la_entrevista():
     boton_finalizar_encuesta= mf.obtener_elemento_por_id(driver, "finalizar_encuesta")
     boton_finalizar_encuesta.click()
 
-    #mf.siguiente(driver)
+def test_envio_cedulas():
+    mf.enviar_cedulas(driver)
 
 
