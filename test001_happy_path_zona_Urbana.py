@@ -99,7 +99,7 @@ def test_click_manzana_69_vivienda1():
     vivienda_card = mf.obtener_elemento_por_id(driver, "text_vivienda")
     assert "Vivienda 01" == vivienda_card.text
     seccion_card = mf.obtener_elemento_por_id(driver, "text_seccion")
-    assert "SECCION: 362" == seccion_card.text
+    assert "SECCIÓN: 362" == seccion_card.text
     manzana_card = mf.obtener_elemento_por_id(driver, "text_manzana")
     assert "MANZANA: 69" == manzana_card.text
     distrito_card = mf.obtener_elemento_por_id(driver, "text_distrito")
@@ -119,7 +119,7 @@ def test_validar_informacion_Geoelectoral():
     texto_municipio = mf.obtener_elemento_por_id(driver, "municipio")
     assert "Municipio: CALVILLO" == texto_municipio.text
     texto_seccion = mf.obtener_elemento_por_id(driver, "seccion")
-    assert "Seccion: 362" == texto_seccion.text
+    assert "Sección: 362" == texto_seccion.text
     texto_localidad = mf.obtener_elemento_por_id(driver, "localidad")
     assert "Localidad: CALVILLO" == texto_localidad.text
     texto_manzana = mf.obtener_elemento_por_id(driver, "manzana")
@@ -167,7 +167,7 @@ def test_agregar_habitante():
     funApp.agregar_ciudadano_fuera_del_padron(driver, "Valencia", "Lerma", "Mauricio")
     ciudadano1 = mf.obtener_lista_de_elementos_id(driver, "nombreTextView")
     ciudadano1[0].click()
-    funApp.seleccionar_fecha_nacimiento(driver, "1921", "lun., 12 de septiembre de 1921")
+    funApp.seleccionar_fecha_nacimiento(driver, "1921", "lun., 10 de octubre de 1921")
     sexo = mf.obtener_elemento_radiobutton_xpath(driver, "Hombre")
     sexo.click()
     driver.swipe(520, 1914, 520, 1047)

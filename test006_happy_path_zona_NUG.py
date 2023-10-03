@@ -20,6 +20,7 @@ caps = {
     # "appium:appActivity": "com.ine.app.modules.main.view.MainActivity",
     "appium:appActivity": "com.ine.app.modules.splash.view.SplashActivity",
     "platformName": "Android",
+    # "noReset": True,
     "appium:appWaitDuration": 30000,
 }
 
@@ -85,23 +86,23 @@ def test_menu_lateral_y_apartado_viviendas_seleccionadas():
     opcion_viviendas_seleccionadas.click()
 
 
-def test_click_manzana_69():
+def test_click_localidad_11():
     """"""
     mf.dar_click_tab_en_proceso(driver)
-    mf.dar_click_en_manzana_seleccionada(driver, "Manzana 69")
+    mf.dar_click_en_localidad_seleccionada(driver, "Localidad 11")
 
 
-def test_click_manzana_69_vivienda3():
-    """se selecciona la vivienda 1 de la manzana 8 para iniciar encuestas"""
-    # mf.dar_click_tab_en_proceso(driver)
-    mf.dar_click_en_vivienda_de_manzana_seleccionada(driver, "Vivienda 3")
+def test_click_localidad_11_vivienda1():
+    """se selecciona la vivienda 1 de la localidad 11 para iniciar encuestas"""
+    driver.swipe(520, 1514, 520, 1047)
+    mf.dar_click_en_vivienda_de_localidad_seleccionada(driver, "Vivienda 1")
 
     vivienda_card = mf.obtener_elemento_por_id(driver, "text_vivienda")
-    assert "Vivienda 03" == vivienda_card.text
+    assert "Vivienda 01" == vivienda_card.text
     seccion_card = mf.obtener_elemento_por_id(driver, "text_seccion")
-    assert "SECCION: 362" == seccion_card.text
+    assert "SECCIÓN: 427" == seccion_card.text
     manzana_card = mf.obtener_elemento_por_id(driver, "text_manzana")
-    assert "MANZANA: 69" == manzana_card.text
+    assert "LOCALIDAD: 11" == manzana_card.text
     distrito_card = mf.obtener_elemento_por_id(driver, "text_distrito")
     assert "DISTRITO: 01" == distrito_card.text
 
@@ -117,64 +118,23 @@ def test_validar_informacion_Geoelectoral():
     texto_distrito = mf.obtener_elemento_por_id(driver, "distrito")
     assert "Distrito: 1" == texto_distrito.text
     texto_municipio = mf.obtener_elemento_por_id(driver, "municipio")
-    assert "Municipio: CALVILLO" == texto_municipio.text
+    assert "Municipio: PABELLON DE ARTEAGA" == texto_municipio.text
     texto_seccion = mf.obtener_elemento_por_id(driver, "seccion")
-    assert "Seccion: 362" == texto_seccion.text
+    assert "Sección: 427" == texto_seccion.text
     texto_localidad = mf.obtener_elemento_por_id(driver, "localidad")
-    assert "Localidad: CALVILLO" == texto_localidad.text
-    texto_manzana = mf.obtener_elemento_por_id(driver, "manzana")
-    assert "Manzana: 69" == texto_manzana.text
+    assert "Localidad: LAS BARRANQUITAS (SAN ISIDRO)" == texto_localidad.text
 
 
-def test_validar_informacion_Domicilio():
-    """Test para comprobar la informacion geoelectoral pregunta 1"""
-    texto_calle = mf.obtener_elemento_por_id(driver, "calle")
-    assert "Calle: RIOS" == texto_calle.text
-    texto_numExterior = mf.obtener_elemento_por_id(driver, "numExterior")
-    assert "Número exterior: 3" == texto_numExterior.text
-    texto_colonia_localidad = mf.obtener_elemento_por_id(driver, "coloniaLocalidad")
-    assert "Colonia o Localidad: CALVILLO" == texto_colonia_localidad.text
-    texto_consecutivo = mf.obtener_elemento_por_id(driver, "consecutivo")
-    assert "Consecutivo de vivienda: 3" == texto_consecutivo.text
-
-
-def test_cuestionario_pregunta_3():
+def test_cuestionario_pregunta_2():
     """Se contesta la pregunta 3 con la opción 1 vivienda habitada"""
+    pregunta2 = mf.obtener_lista_de_elementos_radiobutom(driver)
+    pregunta2[0].click()
     mf.siguiente(driver)
-    pregunta3 = mf.obtener_lista_de_elementos_id(driver, "opcion")
-    pregunta3[0].click()
     mf.siguiente(driver)
 
 
 def test_cuestionario_pregunta_4():
     """Se contesta la pregunta 3 con la opción 1 vivienda habitada"""
-    pregunta4 = mf.obtener_lista_de_elementos_radiobutom(driver)
-    pregunta4[1].click()
-    driver.swipe(520, 1914, 520, 1047)
-    agendar_visita = mf.obtener_elemento_radiobutton_xpath(driver, "Si")
-    agendar_visita.click()
-    driver.swipe(520, 1914, 520, 1047)
-    boton_agendar = mf.obtener_elemento_por_id(driver, "agendar_encuesta")
-    boton_agendar.click()
-    wait = WebDriverWait(driver, 10)
-    guardar_visita = wait.until(
-        EC.presence_of_element_located((AppiumBy.ID, "com.google.android.calendar:id/action_today")))
-    guardar_visita.click()
-    time.sleep(3)
-    driver.swipe(1080, 914, 540, 914)
-
-
-def test_segunda_visita_cuestionario_pregunta_4():
-    """Se contesta la pregunta 3 con la opción 1 vivienda habitada"""
-    mf.dar_click_tab_en_proceso(driver)
-    mf.dar_click_en_manzana_seleccionada(driver, "Manzana 69")
-    mf.dar_click_en_vivienda_de_manzana_seleccionada(driver, "Vivienda 3")
-    boton_seleccionar_en_card = driver.find_element(AppiumBy.ID, "com.ine.app:id/btn_seleccionar")
-    boton_seleccionar_en_card.click()
-    mf.siguiente(driver)
-    pregunta3 = mf.obtener_lista_de_elementos_id(driver, "opcion")
-    pregunta3[0].click()
-    mf.siguiente(driver)
     pregunta4 = mf.obtener_lista_de_elementos_radiobutom(driver)
     pregunta4[0].click()
     mf.siguiente(driver)
@@ -191,17 +151,17 @@ def test_cuestionario_pregunta_5_2():
 
 
 def test_agregar_habitante():
-    funApp.agregar_ciudadano_fuera_del_padron(driver, "Valencia", "Lerma", "Carolina")
+    funApp.agregar_ciudadano_fuera_del_padron(driver, "Trujillo", "Valencia", "Sofia")
     ciudadano1 = mf.obtener_lista_de_elementos_id(driver, "nombreTextView")
     ciudadano1[0].click()
-    funApp.seleccionar_fecha_nacimiento(driver, "1921", "lun., 12 de septiembre de 1921")
+    funApp.seleccionar_fecha_nacimiento(driver, "1921", "lun., 10 de octubre de 1921")
     sexo = mf.obtener_elemento_radiobutton_xpath(driver, "Mujer")
     sexo.click()
     driver.swipe(520, 1914, 520, 1047)
     grado_escolar = mf.obtener_elemento_radiobutton_xpath(driver, "Ninguno")
     grado_escolar.click()
     driver.swipe(520, 1914, 520, 1047)
-    ocupacion = mf.obtener_elemento_radiobutton_xpath(driver, "Trabaja")
+    ocupacion = mf.obtener_elemento_radiobutton_xpath(driver, "Estudia")
     ocupacion.click()
     mf.siguiente(driver)
 
@@ -230,8 +190,10 @@ def test_pregunta_11_1():
     boton_finalizar_encuesta = mf.obtener_elemento_por_id(driver, "finalizar")
     boton_finalizar_encuesta.click()
 
+
 def test_envio_encuestas():
     mf.enviar_encuestas(driver)
+
 
 gc.collect()
 time.sleep(1)

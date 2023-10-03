@@ -88,7 +88,7 @@ def test_click_seccion():
     seccion[1].click()
 
 
-# @pytest.mark.skip()
+#@pytest.mark.skip()
 def test_click_manzana_69():
     """"Guardar los 5 registros del portal seleccionarlos y enviarlos """
     mf.dar_click_seccion(driver, "Sección 362")
@@ -98,7 +98,7 @@ def test_click_manzana_69():
     mf.guardar_registros_conteo(driver)
 
 
-# @pytest.mark.skip()
+#@pytest.mark.skip()
 def test_click_manzana_49():
     """Poner solo 2 viviendas habitadas"""
     mf.dar_click_tab_en_proceso(driver)
@@ -118,7 +118,7 @@ def test_click_manzana_49():
     mf.guardar_registros_conteo(driver)
 
 
-# @pytest.mark.skip()
+#@pytest.mark.skip()
 def test_click_manzana_75():
     """Conteo de manzana a la que se le agregan 5 direcciones nuevas y se ponen las que vienen del portal como
        deshabitadas"""
@@ -168,9 +168,16 @@ def test_click_manzana_78():
         time.sleep(.5)
 
     mf.guardar_registros_conteo(driver)
+    registrar_causa= mf.obtener_elemento_por_id(driver, "causaEdit")
+    registrar_causa.set_text("El terreno esta totalmente deshabitado")
+    driver.hide_keyboard()
+    wait = WebDriverWait(driver, 10)
+    confirmar_guardar_causa = wait.until(
+        EC.presence_of_element_located((AppiumBy.XPATH, "//android.widget.Button[@text='GUARDAR']")))
+    confirmar_guardar_causa.click()
 
 
-# @pytest.mark.skip()
+#@pytest.mark.skip()
 def test_click_manzana_96():
     """Se agregan 5 registros con el número exterior 1 """
     mf.dar_click_tab_en_proceso(driver)
@@ -194,7 +201,7 @@ def test_click_manzana_96():
     mf.guardar_registros_conteo(driver)
 
 
-# @pytest.mark.skip()
+#@pytest.mark.skip()
 def test_click_manzana_104():
     """Se ponen todas las viviendas que vienen del portal como deshabitadas y se agregan 5 con el numero 1 repetido"""
     mf.dar_click_tab_en_proceso(driver)
@@ -226,7 +233,7 @@ def test_click_manzana_104():
     mf.guardar_registros_conteo(driver)
 
 
-# @pytest.mark.skip()
+#@pytest.mark.skip()
 def test_click_manzana_8():
     """"Guardar los 5 registros del portal seleccionarlos y enviarlos """
     mf.dar_click_seccion(driver, "Sección 384")
@@ -236,7 +243,7 @@ def test_click_manzana_8():
     mf.guardar_registros_conteo(driver)
 
 
-# @pytest.mark.skip()
+#@pytest.mark.skip()
 def test_click_manzana_14():
     """"Guardar los 5 registros del portal seleccionarlos y enviarlos """
     mf.dar_click_seccion(driver, "Sección 384")
@@ -255,7 +262,7 @@ def test_click_manzana_14():
     mf.guardar_registros_conteo(driver)
 
 
-# @pytest.mark.skip()
+#@pytest.mark.skip()
 def test_envio_seleccion():
     """"Guardar los 5 registros del portal seleccionarlos y enviarlos """
     mf.dar_click_en_seleccionar(driver)

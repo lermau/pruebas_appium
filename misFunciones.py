@@ -127,6 +127,7 @@ def dar_click_en_vivienda_de_manzana_seleccionada(driver, numero_de_vivienda):
     viviendas[indice_vivienda].click()
     time.sleep(.5)
 
+
 def dar_click_en_vivienda_de_localidad_seleccionada(driver, numero_de_vivienda):
     viviendas = driver.find_elements(AppiumBy.ID, 'com.ine.app:id/childTitle')
     nombres_de_viviendas = []
@@ -155,6 +156,13 @@ def obtener_lista_de_elementos_radiobutom(driver):
     wait = WebDriverWait(driver, 10)
     lista_elementos = wait.until(
         EC.presence_of_all_elements_located((AppiumBy.CLASS_NAME, "android.widget.RadioButton")))
+    return lista_elementos
+
+
+def obtener_lista_de_elementos_textview(driver, nombre):
+    wait = WebDriverWait(driver, 10)
+    lista_elementos = wait.until(
+        EC.presence_of_all_elements_located((AppiumBy.XPATH, f"//android.widget.TextView[@text='{nombre}']")))
     return lista_elementos
 
 
@@ -188,6 +196,7 @@ def obtener_elemento_radiobutton_xpath(driver, text):
         EC.presence_of_element_located((AppiumBy.XPATH, f"//android.widget.RadioButton[@text='{text}']")))
     return element
 
+
 def obtener_elemento_text_view_xpath(driver, text):
     wait = WebDriverWait(driver, 10)
     element = wait.until(
@@ -203,6 +212,17 @@ def enviar_encuestas(driver):
     boton_enviar_encuesta = obtener_elemento_por_id(driver, "enviar")
     boton_enviar_encuesta.click()
 
+
+def enviar_cedulas(driver):
+    wait = WebDriverWait(driver, 10)
+    element = wait.until(
+        EC.presence_of_element_located((AppiumBy.XPATH, f"//android.widget.TextView[@text='COMPLETADAS']")))
+    element.click()
+    boton_enviar_cedula = obtener_elemento_por_id(driver, "proceder")
+    boton_enviar_cedula.click()
+
+
+
 def dar_click_en_localidad_seleccionada(driver, nombre_localidad):
     localidades = driver.find_elements(AppiumBy.ID, 'com.ine.app:id/parentTitle')
     nombres_de_localidades = []
@@ -212,3 +232,29 @@ def dar_click_en_localidad_seleccionada(driver, nombre_localidad):
     localidades[indice_localidad].click()
     time.sleep(.5)
 
+
+def dar_click_en_seccion_actualizacion(driver, nombre_ciudadano):
+    wait = WebDriverWait(driver, 10)
+    lista_secciones = wait.until(
+        EC.presence_of_all_elements_located((AppiumBy.ID, "com.ine.app:id/parentTitle")))
+    #lista_secciones[0].click()
+    numeros_de_seccion = []
+    for seccion in lista_secciones:
+        numeros_de_seccion.append(seccion.text)
+    indice_seccion = numeros_de_seccion.index(f"{nombre_ciudadano}")
+    lista_secciones[indice_seccion].click()
+    time.sleep(.5)
+
+
+def dar_click_en_ciudadano(driver, nombre_ciudadano):
+    wait = WebDriverWait(driver, 10)
+    lista_ciudadanos = wait.until(
+        EC.presence_of_all_elements_located((AppiumBy.ID, "com.ine.app:id/childTitle")))
+    #lista_secciones[0].click()
+    print(len(lista_ciudadanos))
+    nombres_de_ciudadanos = []
+    for ciudadano in lista_ciudadanos:
+        nombres_de_ciudadanos.append(ciudadano.text)
+    indice_ciudadano = nombres_de_ciudadanos.index(f"{nombre_ciudadano}")
+    lista_ciudadanos[indice_ciudadano].click()
+    time.sleep(.5)
