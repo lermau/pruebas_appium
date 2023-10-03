@@ -199,3 +199,7 @@ def test_pregunta12():
     tab_completadas = driver.find_element(AppiumBy.XPATH, "//android.widget.TextView[@text='COMPLETADAS']")
     tab_completadas.click()
 
+def test_envio_cedulas():
+    mf.enviar_cedulas(driver)
+
+
