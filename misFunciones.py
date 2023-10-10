@@ -203,6 +203,12 @@ def obtener_elemento_text_view_xpath(driver, text):
         EC.presence_of_element_located((AppiumBy.XPATH, f"//android.widget.TextView[@text='{text}']")))
     return element
 
+def obtener_elemento_CheckedTextview_xpath(driver, text):
+    wait = WebDriverWait(driver, 10)
+    element = wait.until(
+        EC.presence_of_element_located((AppiumBy.XPATH, f"//android.widget.CheckedTextView[@text='{text}']")))
+    return element
+
 
 def enviar_encuestas(driver):
     wait = WebDriverWait(driver, 10)
