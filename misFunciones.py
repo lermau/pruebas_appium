@@ -6,6 +6,9 @@ from selenium.webdriver.support import expected_conditions as EC
 from appium.webdriver.common.mobileby import MobileBy as AppiumBy
 import datetime
 
+
+
+####Funciones para Pruebas Appium######
 def dar_click_seccion(driver, text):
     wait = WebDriverWait(driver, 10)
     element = wait.until(
