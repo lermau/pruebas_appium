@@ -267,3 +267,5 @@ def test_envio_seleccion():
     """"Guardar los 5 registros del portal seleccionarlos y enviarlos """
     mf.dar_click_en_seleccionar(driver)
     mf.dar_click_en_enviar_seleccion(driver)
+    time.sleep(10)
+    driver.quit()

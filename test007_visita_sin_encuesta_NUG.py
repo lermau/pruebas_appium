@@ -141,6 +141,8 @@ def test_finalizar_encuesta():
 #@pytest.mark.skip()
 def test_envio_encuestas():
     mf.enviar_encuestas(driver)
+    time.sleep(10)
+    driver.quit()
 
 
 

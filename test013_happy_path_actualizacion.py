@@ -163,3 +163,5 @@ def test_pregunta12():
 
 def test_envio_cedulas():
     mf.enviar_cedulas(driver)
+    time.sleep(10)
+    driver.quit()

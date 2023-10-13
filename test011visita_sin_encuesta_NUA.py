@@ -142,9 +142,8 @@ def test_finalizar_encuesta():
 def test_envio_encuestas():
     #input("Dale click para enviar  --->")
     mf.enviar_encuestas(driver)
-    #mf.siguiente(driver)
- #   mf.siguiente(driver)
-
+    time.sleep(10)
+    driver.quit()
 
 gc.collect()
 time.sleep(1)

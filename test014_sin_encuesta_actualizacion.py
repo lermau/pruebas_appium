@@ -111,5 +111,7 @@ def test_realizacion_de_la_entrevista():
 
 def test_envio_cedulas():
     mf.enviar_cedulas(driver)
+    time.sleep(10)
+    driver.quit()
 
 

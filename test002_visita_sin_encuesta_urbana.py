@@ -149,6 +149,8 @@ def test_cuestionario_pregunta_3():
 
 def test_envio_encuestas():
     mf.enviar_encuestas(driver)
+    time.sleep(10)
+    driver.quit()
 
 
 gc.collect()

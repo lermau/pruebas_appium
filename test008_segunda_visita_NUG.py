@@ -225,6 +225,8 @@ def test_pregunta_11_1():
 
 def test_envio_encuestas():
     mf.enviar_encuestas(driver)
+    time.sleep(10)
+    driver.quit()
 
 gc.collect()
 time.sleep(1)
