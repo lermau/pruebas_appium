@@ -88,7 +88,7 @@ def test_click_manzana_1():
     mf.dar_click_seccion(driver, "Sección 478")
     mf.dar_click_en_manzana_con_numero(driver, "Manzana 1")
     mf.dar_click_en_aceptar_usu_de_coordenadas(driver)
-    mf.click_a_calle(driver, "PAZ")
+    mf.click_a_calle(driver, "DULCE")
     wait = WebDriverWait(driver, 10)
     opciones_no = wait.until(
         EC.presence_of_all_elements_located((By.CLASS_NAME, "android.widget.RadioButton")))
@@ -98,18 +98,7 @@ def test_click_manzana_1():
         time.sleep(.5)
     mf.guardar_registros_conteo(driver)
 
-    mf.click_a_calle(driver, "GUERRA")
-    wait = WebDriverWait(driver, 10)
-    opciones_no = wait.until(
-        EC.presence_of_all_elements_located((By.CLASS_NAME, "android.widget.RadioButton")))
-    print(len(opciones_no))
-    for no in range(1, 6, 2):
-        opciones_no[no].click()
-        time.sleep(.5)
-
-    mf.guardar_registros_conteo(driver)
-
-    mf.click_a_calle(driver, "FORTUNA")
+    mf.click_a_calle(driver, "CHOCOLATE")
     wait = WebDriverWait(driver, 10)
     opciones_no = wait.until(
         EC.presence_of_all_elements_located((By.CLASS_NAME, "android.widget.RadioButton")))
@@ -120,7 +109,18 @@ def test_click_manzana_1():
 
     mf.guardar_registros_conteo(driver)
 
-    mf.click_a_calle(driver, "ESPERANZA")
+    mf.click_a_calle(driver, "BOMBON")
+    wait = WebDriverWait(driver, 10)
+    opciones_no = wait.until(
+        EC.presence_of_all_elements_located((By.CLASS_NAME, "android.widget.RadioButton")))
+    print(len(opciones_no))
+    for no in range(1, 6, 2):
+        opciones_no[no].click()
+        time.sleep(.5)
+
+    mf.guardar_registros_conteo(driver)
+
+    mf.click_a_calle(driver, "CHICLES")
     wait = WebDriverWait(driver, 10)
     opciones_no = wait.until(
         EC.presence_of_all_elements_located((By.CLASS_NAME, "android.widget.RadioButton")))
