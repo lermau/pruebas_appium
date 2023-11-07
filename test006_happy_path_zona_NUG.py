@@ -6,27 +6,30 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import misFunciones as mf
 import funcionesApp as funApp
-
 import time
+import configuracion as conf
 
-caps = {
-    "appium:platformVersion": "10",
-    # "appium:deviceName": "lancelot",
-    # "appium:platformVersion": "8",
-    # "appium:deviceName": "cereus",
-    "appium:deviceName": "doha",
-    "appium:automationName": "UiAutomator2",
-    "appium:appPackage": "com.ine.app",
-    # "appium:appActivity": "com.ine.app.modules.main.view.MainActivity",
-    "appium:appActivity": "com.ine.app.modules.splash.view.SplashActivity",
-    "platformName": "Android",
-    # "noReset": True,
-    "appium:appWaitDuration": 30000,
-}
-
-print("Iniciando Test03  con Appium")
-driver = webdriver.Remote('http://localhost:4723/wd/hub', caps)
+driver = conf.configuracion_celular()
 driver.implicitly_wait(30)
+
+# caps = {
+#     "appium:platformVersion": "10",
+#     # "appium:deviceName": "lancelot",
+#     # "appium:platformVersion": "8",
+#     # "appium:deviceName": "cereus",
+#     "appium:deviceName": "doha",
+#     "appium:automationName": "UiAutomator2",
+#     "appium:appPackage": "com.ine.app",
+#     # "appium:appActivity": "com.ine.app.modules.main.view.MainActivity",
+#     "appium:appActivity": "com.ine.app.modules.splash.view.SplashActivity",
+#     "platformName": "Android",
+#     # "noReset": True,
+#     "appium:appWaitDuration": 30000,
+# }
+#
+# print("Iniciando Test03  con Appium")
+# driver = webdriver.Remote('http://localhost:4723/wd/hub', caps)
+# driver.implicitly_wait(30)
 
 
 # @pytest.mark.skip()
@@ -89,7 +92,7 @@ def test_menu_lateral_y_apartado_viviendas_seleccionadas():
 def test_click_localidad_11():
     """"""
     mf.dar_click_tab_en_proceso(driver)
-    mf.dar_click_en_localidad_seleccionada(driver, "Localidad 11")
+    mf.dar_click_en_localidad_seleccionada(driver, "Localidad 11, Sección 427")
 
 
 def test_click_localidad_11_vivienda1():

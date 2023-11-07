@@ -6,26 +6,29 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import misFunciones as mf
 import funcionesApp as funApp
-
 import time
+import configuracion as conf
 
-caps = {
-    "appium:platformVersion": "10",
-    # "appium:deviceName": "lancelot",
-    # "appium:platformVersion": "8",
-    # "appium:deviceName": "cereus",
-    "appium:deviceName": "doha",
-    "appium:automationName": "UiAutomator2",
-    "appium:appPackage": "com.ine.app",
-    # "appium:appActivity": "com.ine.app.modules.main.view.MainActivity",
-    "appium:appActivity": "com.ine.app.modules.splash.view.SplashActivity",
-    "platformName": "Android",
-    "appium:appWaitDuration": 30000,
-}
-
-print("Iniciando Test03  con Appium")
-driver = webdriver.Remote('http://localhost:4723/wd/hub', caps)
+driver = conf.configuracion_celular()
 driver.implicitly_wait(30)
+
+# caps = {
+#     "appium:platformVersion": "10",
+#     # "appium:deviceName": "lancelot",
+#     # "appium:platformVersion": "8",
+#     # "appium:deviceName": "cereus",
+#     "appium:deviceName": "doha",
+#     "appium:automationName": "UiAutomator2",
+#     "appium:appPackage": "com.ine.app",
+#     # "appium:appActivity": "com.ine.app.modules.main.view.MainActivity",
+#     "appium:appActivity": "com.ine.app.modules.splash.view.SplashActivity",
+#     "platformName": "Android",
+#     "appium:appWaitDuration": 30000,
+# }
+#
+# print("Iniciando Test03  con Appium")
+# driver = webdriver.Remote('http://localhost:4723/wd/hub', caps)
+# driver.implicitly_wait(30)
 
 
 # @pytest.mark.skip()
@@ -92,7 +95,7 @@ def test_click_localidad_11():
     """"""
     driver.swipe(520, 1514, 520, 1047)
     mf.dar_click_tab_en_proceso(driver)
-    mf.dar_click_en_localidad_seleccionada(driver, "Localidad 11")
+    mf.dar_click_en_localidad_seleccionada(driver, "Localidad 11, Sección 427")
 
 def test_click_localidad_11_vivienda3():
     """se selecciona la vivienda 1 de la manzana 8 para iniciar encuestas"""
@@ -155,10 +158,10 @@ def test_agendar_visita():
 
 def test_segunda_visita_cuestionario():
     """Se inicia el flujo de la segunda visita"""
-
+    time.sleep(3)
     #driver.swipe(520, 1514, 520, 1047)
     mf.dar_click_tab_en_proceso(driver)
-    mf.dar_click_en_localidad_seleccionada(driver, "Localidad 11")
+    mf.dar_click_en_localidad_seleccionada(driver, "Localidad 11, Sección 427")
     driver.swipe(520, 1514, 520, 1047)
     mf.dar_click_en_vivienda_de_manzana_seleccionada(driver, "Vivienda 3")
     boton_seleccionar_en_card = driver.find_element(AppiumBy.ID, "com.ine.app:id/btn_seleccionar")

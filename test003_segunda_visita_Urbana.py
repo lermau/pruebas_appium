@@ -6,26 +6,29 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import misFunciones as mf
 import funcionesApp as funApp
-
 import time
+import configuracion as conf
 
-caps = {
-    "appium:platformVersion": "10",
-    # "appium:deviceName": "lancelot",
-    # "appium:platformVersion": "8",
-    # "appium:deviceName": "cereus",
-    "appium:deviceName": "doha",
-    "appium:automationName": "UiAutomator2",
-    "appium:appPackage": "com.ine.app",
-    # "appium:appActivity": "com.ine.app.modules.main.view.MainActivity",
-    "appium:appActivity": "com.ine.app.modules.splash.view.SplashActivity",
-    "platformName": "Android",
-    "appium:appWaitDuration": 30000,
-}
-
-print("Iniciando Test03  con Appium")
-driver = webdriver.Remote('http://localhost:4723/wd/hub', caps)
+driver = conf.configuracion_celular()
 driver.implicitly_wait(30)
+
+# caps = {
+#     "appium:platformVersion": "10",
+#     # "appium:deviceName": "lancelot",
+#     # "appium:platformVersion": "8",
+#     # "appium:deviceName": "cereus",
+#     "appium:deviceName": "doha",
+#     "appium:automationName": "UiAutomator2",
+#     "appium:appPackage": "com.ine.app",
+#     # "appium:appActivity": "com.ine.app.modules.main.view.MainActivity",
+#     "appium:appActivity": "com.ine.app.modules.splash.view.SplashActivity",
+#     "platformName": "Android",
+#     "appium:appWaitDuration": 30000,
+# }
+#
+# print("Iniciando Test03  con Appium")
+# driver = webdriver.Remote('http://localhost:4723/wd/hub', caps)
+# driver.implicitly_wait(30)
 
 
 # @pytest.mark.skip()
@@ -88,7 +91,7 @@ def test_menu_lateral_y_apartado_viviendas_seleccionadas():
 def test_click_manzana_69():
     """"""
     mf.dar_click_tab_en_proceso(driver)
-    mf.dar_click_en_manzana_seleccionada(driver, "Manzana 69")
+    mf.dar_click_en_manzana_seleccionada(driver, "Manzana 69, Sección 362")
 
 
 def test_click_manzana_69_vivienda3():
@@ -166,8 +169,9 @@ def test_cuestionario_pregunta_4():
 
 def test_segunda_visita_cuestionario_pregunta_4():
     """Se contesta la pregunta 3 con la opción 1 vivienda habitada"""
+    time.sleep(3)
     mf.dar_click_tab_en_proceso(driver)
-    mf.dar_click_en_manzana_seleccionada(driver, "Manzana 69")
+    mf.dar_click_en_manzana_seleccionada(driver, "Manzana 69, Sección 362")
     mf.dar_click_en_vivienda_de_manzana_seleccionada(driver, "Vivienda 3")
     boton_seleccionar_en_card = driver.find_element(AppiumBy.ID, "com.ine.app:id/btn_seleccionar")
     boton_seleccionar_en_card.click()

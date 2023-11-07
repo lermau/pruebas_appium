@@ -7,7 +7,6 @@ from appium.webdriver.common.mobileby import MobileBy as AppiumBy
 import datetime
 
 
-
 ####Funciones para Pruebas Appium######
 def dar_click_seccion(driver, text):
     wait = WebDriverWait(driver, 10)
@@ -45,6 +44,13 @@ def dar_click_en_seleccionar(driver):
 
     boton_seleccionar = driver.find_element(AppiumBy.ID, "com.ine.app:id/seleccionar")
     boton_seleccionar.click()
+
+
+def obtener_texto_toast(driver):
+    wait = WebDriverWait(driver, 10)
+    toast_text = wait.until(
+        EC.presence_of_element_located((By.XPATH, "//android.widget.Toast"))).get_attribute("text")
+    return toast_text
 
 
 def dar_click_en_enviar_seleccion(driver):
@@ -147,6 +153,14 @@ def obtener_elemento_por_id(driver, id_nombre):
         EC.presence_of_element_located((AppiumBy.ID, f"com.ine.app:id/{id_nombre}")))
     return elemento
 
+def obtener_elemento_por_idButton(driver, id_nombre):
+    wait = WebDriverWait(driver, 10)
+    elemento = wait.until(
+        EC.presence_of_element_located((AppiumBy.ID, f"android:id/{id_nombre}")))
+
+    return elemento
+
+
 
 def obtener_lista_de_elementos_id(driver, id_nombre):
     wait = WebDriverWait(driver, 10)
@@ -206,6 +220,7 @@ def obtener_elemento_text_view_xpath(driver, text):
         EC.presence_of_element_located((AppiumBy.XPATH, f"//android.widget.TextView[@text='{text}']")))
     return element
 
+
 def obtener_elemento_CheckedTextview_xpath(driver, text):
     wait = WebDriverWait(driver, 10)
     element = wait.until(
@@ -231,7 +246,6 @@ def enviar_cedulas(driver):
     boton_enviar_cedula.click()
 
 
-
 def dar_click_en_localidad_seleccionada(driver, nombre_localidad):
     localidades = driver.find_elements(AppiumBy.ID, 'com.ine.app:id/parentTitle')
     nombres_de_localidades = []
@@ -246,7 +260,7 @@ def dar_click_en_seccion_actualizacion(driver, nombre_ciudadano):
     wait = WebDriverWait(driver, 10)
     lista_secciones = wait.until(
         EC.presence_of_all_elements_located((AppiumBy.ID, "com.ine.app:id/parentTitle")))
-    #lista_secciones[0].click()
+    # lista_secciones[0].click()
     numeros_de_seccion = []
     for seccion in lista_secciones:
         numeros_de_seccion.append(seccion.text)
@@ -259,7 +273,7 @@ def dar_click_en_ciudadano(driver, nombre_ciudadano):
     wait = WebDriverWait(driver, 10)
     lista_ciudadanos = wait.until(
         EC.presence_of_all_elements_located((AppiumBy.ID, "com.ine.app:id/childTitle")))
-    #lista_secciones[0].click()
+    # lista_secciones[0].click()
     print(len(lista_ciudadanos))
     nombres_de_ciudadanos = []
     for ciudadano in lista_ciudadanos:
@@ -269,9 +283,6 @@ def dar_click_en_ciudadano(driver, nombre_ciudadano):
     time.sleep(.5)
 
 
-
-
-
 def fecha_de_nacimiento():
     # Obtén la fecha actual
     fecha_actual = datetime.date.today()
@@ -279,8 +290,8 @@ def fecha_de_nacimiento():
     mes_actual = fecha_actual.month
     dias_de_la_semana = ("lun.", "mar.", "mié.", "jue.", "vie.", "sáb.", "dom.")
     mes = (
-    "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre",
-    "diciembre")
+        "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre",
+        "diciembre")
     fechaNacimiento = datetime.date(1921, mes_actual, 9)
     fechaArmada = f"{dias_de_la_semana[fechaNacimiento.weekday()]}, 9 de {mes[mes_actual - 1]} de 1921"
     # print(fechaArmada)

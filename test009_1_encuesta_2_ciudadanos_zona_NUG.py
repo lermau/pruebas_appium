@@ -6,26 +6,29 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import misFunciones as mf
 import funcionesApp as funApp
-
 import time
+import configuracion as conf
 
-caps = {
-    "appium:platformVersion": "10",
-    # "appium:deviceName": "lancelot",
-    # "appium:platformVersion": "8",
-    # "appium:deviceName": "cereus",
-    "appium:deviceName": "doha",
-    "appium:automationName": "UiAutomator2",
-    "appium:appPackage": "com.ine.app",
-    # "appium:appActivity": "com.ine.app.modules.main.view.MainActivity",
-    "appium:appActivity": "com.ine.app.modules.splash.view.SplashActivity",
-    "platformName": "Android",
-    "appium:appWaitDuration": 30000,
-}
-
-print("Iniciando Test03  con Appium")
-driver = webdriver.Remote('http://localhost:4723/wd/hub', caps)
+driver = conf.configuracion_celular()
 driver.implicitly_wait(30)
+
+# caps = {
+#     "appium:platformVersion": "10",
+#     # "appium:deviceName": "lancelot",
+#     # "appium:platformVersion": "8",
+#     # "appium:deviceName": "cereus",
+#     "appium:deviceName": "doha",
+#     "appium:automationName": "UiAutomator2",
+#     "appium:appPackage": "com.ine.app",
+#     # "appium:appActivity": "com.ine.app.modules.main.view.MainActivity",
+#     "appium:appActivity": "com.ine.app.modules.splash.view.SplashActivity",
+#     "platformName": "Android",
+#     "appium:appWaitDuration": 30000,
+# }
+#
+# print("Iniciando Test03  con Appium")
+# driver = webdriver.Remote('http://localhost:4723/wd/hub', caps)
+# driver.implicitly_wait(30)
 
 
 # @pytest.mark.skip()
@@ -85,26 +88,26 @@ def test_menu_lateral_y_apartado_viviendas_seleccionadas():
     opcion_viviendas_seleccionadas.click()
 
 
-def test_click_manzana_14():
+def test_click_localidad_65():
     """"""
     mf.dar_click_tab_en_proceso(driver)
-    mf.dar_click_en_manzana_seleccionada(driver, "Manzana 14")
+    mf.dar_click_en_localidad_seleccionada(driver, "Localidad 65, Sección 427")
 
 
-def test_click_manzana14_vivienda1():
+
+def test_click_localidad_65_vivienda1():
     """se selecciona la vivienda 1 de la manzana 8 para iniciar encuestas"""
     # mf.dar_click_tab_en_proceso(driver)
-    mf.dar_click_en_vivienda_de_manzana_seleccionada(driver, "Vivienda 1")
+    mf.dar_click_en_vivienda_de_localidad_seleccionada(driver, "Vivienda 1")
 
     vivienda_card = mf.obtener_elemento_por_id(driver, "text_vivienda")
     assert "Vivienda 01" == vivienda_card.text
     seccion_card = mf.obtener_elemento_por_id(driver, "text_seccion")
-    assert "SECCIÓN: 384" == seccion_card.text
+    assert "SECCIÓN: 427" == seccion_card.text
     manzana_card = mf.obtener_elemento_por_id(driver, "text_manzana")
-    assert "MANZANA: 14" == manzana_card.text
+    assert "LOCALIDAD: 65" == manzana_card.text
     distrito_card = mf.obtener_elemento_por_id(driver, "text_distrito")
     assert "DISTRITO: 01" == distrito_card.text
-
     boton_seleccionar_en_card = driver.find_element(AppiumBy.ID, "com.ine.app:id/btn_seleccionar")
     boton_seleccionar_en_card.click()
     mf.dar_click_en_aceptar_usu_de_coordenadas(driver)
@@ -117,42 +120,24 @@ def test_validar_informacion_Geoelectoral():
     texto_distrito = mf.obtener_elemento_por_id(driver, "distrito")
     assert "Distrito: 1" == texto_distrito.text
     texto_municipio = mf.obtener_elemento_por_id(driver, "municipio")
-    assert "Municipio: CALVILLO" == texto_municipio.text
+    assert "Municipio: PABELLON DE ARTEAGA" == texto_municipio.text
     texto_seccion = mf.obtener_elemento_por_id(driver, "seccion")
-    assert "Sección: 384" == texto_seccion.text
+    assert "Sección: 427" == texto_seccion.text
     texto_localidad = mf.obtener_elemento_por_id(driver, "localidad")
-    assert "Localidad: CALVILLO" == texto_localidad.text
-    texto_manzana = mf.obtener_elemento_por_id(driver, "manzana")
-    assert "Manzana: 14" == texto_manzana.text
+    assert "Localidad: HACIENDA DEL MEZQUITE" == texto_localidad.text
 
-
-def test_validar_informacion_Domicilio():
-    """Test para comprobar la informacion geoelectoral pregunta 1"""
-    texto_calle = mf.obtener_elemento_por_id(driver, "calle")
-    assert "Calle: RIOS" == texto_calle.text
-    texto_numExterior = mf.obtener_elemento_por_id(driver, "numExterior")
-    assert "Número exterior: 1" == texto_numExterior.text
-    texto_colonia_localidad = mf.obtener_elemento_por_id(driver, "coloniaLocalidad")
-    assert "Colonia o Localidad: CALVILLO" == texto_colonia_localidad.text
-    texto_consecutivo = mf.obtener_elemento_por_id(driver, "consecutivo")
-    assert "Consecutivo de vivienda: 1" == texto_consecutivo.text
-
-
-def test_cuestionario_pregunta_3():
-    """Se contesta la pregunta 3 con la opción 1 vivienda habitada"""
+def test_cuestionario_pregunta_2():
+    """Se contesta la pregunta 2 con la opción 1 vivienda habitada"""
+    pregunta2 = mf.obtener_lista_de_elementos_radiobutom(driver)
+    pregunta2[0].click()
     mf.siguiente(driver)
-    pregunta3 = mf.obtener_lista_de_elementos_id(driver, "opcion")
-    pregunta3[0].click()
     mf.siguiente(driver)
-
 
 def test_cuestionario_pregunta_4():
-    """Se contesta la pregunta 3 con la opción 1 vivienda habitada"""
+    """Se contesta la pregunta 4 con la opción 1 vivienda habitada"""
     pregunta4 = mf.obtener_lista_de_elementos_radiobutom(driver)
     pregunta4[0].click()
     mf.siguiente(driver)
-
-
 def test_cuestionario_pregunta_5_2():
     """Se contesta la pregunta 3 con la opción 1 vivienda habitada"""
     pregunta5_2 = mf.obtener_elemento_por_id(
@@ -164,15 +149,19 @@ def test_cuestionario_pregunta_5_2():
 
 
 def test_agregar_habitante():
-    funApp.agregar_ciudadano_fuera_del_padron(driver, "Ugalde", "Contreras", "Rosa")
+    funApp.agregar_ciudadano_fuera_del_padron(driver, "Rubio", "Contla", "Luz")
     ciudadano1 = mf.obtener_lista_de_elementos_id(driver, "nombreTextView")
     ciudadano1[0].click()
     funApp.seleccionar_fecha_nacimiento(driver, "1921", mf.fecha_de_nacimiento())
     sexo = mf.obtener_elemento_radiobutton_xpath(driver, "Mujer")
     sexo.click()
     driver.swipe(520, 1914, 520, 1047)
-    grado_escolar = mf.obtener_elemento_radiobutton_xpath(driver, "Ninguno")
+    grado_escolar = mf.obtener_elemento_radiobutton_xpath(driver, "Primaria")
     grado_escolar.click()
+    anios_estudio = mf.obtener_elemento_por_id(driver, "flecha")
+    anios_estudio.click()
+    anios_6= mf.obtener_elemento_CheckedTextview_xpath(driver, "6")
+    anios_6.click()
     driver.swipe(520, 1914, 520, 1047)
     ocupacion = mf.obtener_elemento_radiobutton_xpath(driver, "Estudia")
     ocupacion.click()
@@ -202,7 +191,7 @@ def test_pregunta_11_1():
     boton_si_sig_ciudadano.click()
 
 def test_agregar_segundo_habitante():
-    funApp.agregar_ciudadano_fuera_del_padron(driver, "Ugalde", "Contreras", "Alejandro")
+    funApp.agregar_ciudadano_fuera_del_padron(driver, "Ugalde", "Contreras", "Alfredo")
     ciudadano2 = mf.obtener_lista_de_elementos_id(driver, "nombreTextView")
     driver.swipe(520, 1914, 520, 1047)
     ciudadano2[1].click()
@@ -210,8 +199,12 @@ def test_agregar_segundo_habitante():
     sexo = mf.obtener_elemento_radiobutton_xpath(driver, "Hombre")
     sexo.click()
     driver.swipe(520, 1914, 520, 1047)
-    grado_escolar = mf.obtener_elemento_radiobutton_xpath(driver, "Ninguno")
+    grado_escolar = mf.obtener_elemento_radiobutton_xpath(driver, "Secundaria")
     grado_escolar.click()
+    anios_estudio = mf.obtener_elemento_por_id(driver, "flecha")
+    anios_estudio.click()
+    anios_6 = mf.obtener_elemento_CheckedTextview_xpath(driver, "3")
+    anios_6.click()
     driver.swipe(520, 1914, 520, 1047)
     ocupacion = mf.obtener_elemento_radiobutton_xpath(driver, "Trabaja")
     ocupacion.click()
@@ -236,8 +229,7 @@ def test_pregunta_ciudadano2_11_1():
     respuesta1.click()
     boton_finalizar_encuesta = mf.obtener_elemento_por_id(driver, "finalizar")
     boton_finalizar_encuesta.click()
-    # boton_si_sig_ciudadano = mf.obtener_elemento_por_id(driver, "btn_aceptar")
-    # boton_si_sig_ciudadano.click()
+
 
 
 
@@ -245,11 +237,11 @@ def test_envio_encuestas():
     mf.enviar_encuestas(driver)
     time.sleep(10)
     driver.quit()
-
-
-
-
-
-
-gc.collect()
-time.sleep(1)
+#
+#
+#
+#
+#
+#
+# gc.collect()
+# time.sleep(1)
